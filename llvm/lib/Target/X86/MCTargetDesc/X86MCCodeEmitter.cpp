@@ -397,12 +397,6 @@ void X86MCCodeEmitter::EmitMemModRMByte(const MCInst &MI, unsigned Op,
   unsigned int KsError;
   bool RIP_rel = false;
 
-  // do we need x64 RIP relative encoding?
-  if (BaseReg == 0 && is64BitMode(STI) && IndexReg.getReg() == 0 && Disp.isImm()) {
-      if (ABS_SUB(MI.getAddress(), (uint64_t)Disp.getImm()) < 2 * (1UL << 30))
-          RIP_rel = true;
-  }
-
   // Handle %rip relative addressing.
   if (RIP_rel || BaseReg == X86::RIP) {    // [disp32+RIP] in X86-64 mode
     assert(is64BitMode(STI) && "Rip-relative addressing requires 64-bit mode");
