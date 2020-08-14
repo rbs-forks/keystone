@@ -60,6 +60,15 @@ kstool armv5be "nop"
 #encoding: [0xe1, 0xa0, 0x00, 0x00]
 echo
 
+echo "::ARMv5E"
+kstool armv5e "nop"
+#encoding: [0x00, 0x00, 0xa0, 0xe1]
+echo
+
+echo "::ARMv5E BE"
+kstool armv5ebe "nop"
+#encoding: [0xe1, 0xa0, 0x00, 0x00]
+echo
 
 echo "::Thumb LE"
 kstool thumb "movs r4, #0xf0"
@@ -72,7 +81,7 @@ kstool thumbbe "movs r4, #0xf0"
 echo
 
 echo "::Arm64 BE"
-kstool arm64be "ldr w1, [sp, #0x8]" 
+kstool arm64be "ldr w1, [sp, #0x8]"
 #encoding: [0xe1,0x0b,0x40,0xb9]
 echo
 
@@ -87,12 +96,12 @@ kstool sparc "add %g1, %g2, %g3"
 echo
 
 echo "::Mips BE"
-kstool mipsbe "and \$9, \$6, \$7" 
+kstool mipsbe "and \$9, \$6, \$7"
 #encoding: [0x00,0xc7,0x48,0x24]
 echo
 
 echo "::Mips LE"
-kstool mips "and \$9, \$6, \$7" 
+kstool mips "and \$9, \$6, \$7"
 #encoding: [0x24,0x48,0xc7,0x00]
 echo
 

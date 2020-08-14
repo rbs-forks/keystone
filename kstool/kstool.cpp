@@ -40,8 +40,10 @@ static void usage(char *prog)
         printf("        armv4tbe:  ARM V4T - big endian\n");
         printf("        armv5:     ARM V5 - little endian\n");
         printf("        armv5be:   ARM V5 - big endian\n");
+        printf("        armv5e     ARM V5E - little endian\n");
+        printf("        armv5ebe:  ARM V5E - big endian\n");
         printf("        xscale:    XSCALE - little endian\n");
-        printf("        xscale:    XSCALE - big endian\n");
+        printf("        xscalebe:  XSCALE - big endian\n");
         printf("        thumb:     Thumb - little endian\n");
         printf("        thumbbe:   Thumb - big endian\n");
         printf("        armv8:     ARM V8 - little endian\n");
@@ -236,6 +238,14 @@ int main(int argc, char **argv)
 
     if (!strcmp(mode, "armv5be")) {
         err = ks_open(KS_ARCH_ARM, KS_MODE_V5+KS_MODE_BIG_ENDIAN+KS_MODE_ARM, &ks);
+    }
+
+    if (!strcmp(mode, "armv5e")) {
+        err = ks_open(KS_ARCH_ARM, KS_MODE_V5E+KS_MODE_LITTLE_ENDIAN+KS_MODE_ARM, &ks);
+    }
+
+    if (!strcmp(mode, "armv5ebe")) {
+        err = ks_open(KS_ARCH_ARM, KS_MODE_V5E+KS_MODE_BIG_ENDIAN+KS_MODE_ARM, &ks);
     }
 
 

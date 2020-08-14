@@ -71,6 +71,7 @@ typedef enum ks_mode {
     KS_MODE_V4 = 1 << 7,
     KS_MODE_XSCALE = 1 << 8,
     KS_MODE_V5 = 1 << 9,
+    KS_MODE_V5E = 1 << 10,
     // mips
     KS_MODE_MICRO = 1 << 4,       // MicroMips mode
     KS_MODE_MIPS3 = 1 << 5,       // Mips III ISA
