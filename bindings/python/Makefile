@@ -1,4 +1,12 @@
 # Python binding for Keystone engine. Nguyen Anh Quynh <aquynh@gmail.com>
+ifndef PYTHON2
+PYTHON2 = python
+endif
+
+ifndef PYTHON3
+PYTHON3 = python3
+endif
+
 
 ifndef BUILDDIR
 OBJDIR = ./build
@@ -9,16 +17,16 @@ endif
 .PHONY: gen_const install install3 clean
 
 gen_const:
-	cd .. && python const_generator.py python
+	cd .. && $(PYTHON2) const_generator.py python
 
 install:
 	rm -rf $(OBJDIR) src/
 	rm -rf prebuilt/win64/keystone.dll
 	rm -rf prebuilt/win32/keystone.dll
 	if test -n "${DESTDIR}"; then \
-		python setup.py build -b $(OBJDIR) install --root="${DESTDIR}"; \
+		$(PYTHON2) setup.py build -b $(OBJDIR) install --root="${DESTDIR}"; \
 	else \
-		python setup.py build -b $(OBJDIR) install; \
+		$(PYTHON2) setup.py build -b $(OBJDIR) install; \
 	fi
 
 install3:
@@ -26,9 +34,9 @@ install3:
 	rm -rf prebuilt/win64/keystone.dll
 	rm -rf prebuilt/win32/keystone.dll
 	if test -n "${DESTDIR}"; then \
-		python3 setup.py build -b $(OBJDIR) install --root="${DESTDIR}"; \
+		$(PYTHON3) setup.py build -b $(OBJDIR) install --root="${DESTDIR}"; \
 	else \
-		python3 setup.py build -b $(OBJDIR) install; \
+		$(PYTHON3) setup.py build -b $(OBJDIR) install; \
 	fi
 
 # build & upload PyPi package with source code of the core
@@ -38,7 +46,7 @@ sdist:
 	rm -rf prebuilt/win32/keystone.dll
 	cp README.pypi-src README
 	cp PKG-INFO.src PKG-INFO
-	python setup.py sdist register upload
+	$(PYTHON2) setup.py sdist register upload
 
 # build & upload PyPi package with source code of the core
 sdist3:
@@ -47,7 +55,7 @@ sdist3:
 	rm -rf prebuilt/win32/keystone.dll
 	cp README.pypi-src README
 	cp PKG-INFO.src PKG-INFO
-	python3 setup.py sdist register upload
+	$(PYTHON3) setup.py sdist register upload
 
 # build & upload PyPi package with prebuilt core
 # NOTE: be sure to have precompiled core under prebuilt/win*/ beforehand
@@ -55,7 +63,7 @@ sdist_win:
 	rm -rf src/ dist/
 	cp README.pypi-win README
 	cp PKG-INFO.win PKG-INFO
-	python setup.py sdist register upload
+	$(PYTHON2) setup.py sdist register upload
 
 # build & upload PyPi package with prebuilt core
 # NOTE: be sure to have precompiled core under prebuilt/win*/ beforehand
@@ -63,7 +71,7 @@ sdist3_win:
 	rm -rf src/ dist/
 	cp README.pypi-win README
 	cp PKG-INFO.win PKG-INFO
-	python3 setup.py sdist register upload
+	$(PYTHON3) setup.py sdist register upload
 
 clean:
 	rm -rf $(OBJDIR) src/ dist/ README
